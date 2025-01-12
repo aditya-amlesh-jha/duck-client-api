@@ -2,6 +2,7 @@ package com.adityajha.duck_client_api.controller;
 
 import com.adityajha.duck_client_api.model.NotificationEntity;
 import com.adityajha.duck_client_api.model.UserEntity;
+import com.adityajha.duck_client_api.publisher.RabbitMQPublisher;
 import com.adityajha.duck_client_api.service.MessageService;
 import com.adityajha.duck_client_api.service.NotificationService;
 import com.adityajha.duck_client_api.service.UserService;
@@ -17,7 +18,7 @@ import java.util.UUID;
 public class ClientNotificationController {
     private final NotificationService notificationService;
     private final UserService userService;
-//    private final MessageService messageService;
+    private final RabbitMQPublisher messageService;
 
     @PostMapping("/addNotification")
     public void addNotificationTemplate(@RequestBody NotificationEntity notificationEntity){
@@ -29,7 +30,6 @@ public class ClientNotificationController {
         System.out.println(notificationId);
         return notificationService.getNotificationById(notificationId);
     }
-
 
     @PostMapping("/addUser")
     public void addUser(@RequestBody UserEntity userEntity){
